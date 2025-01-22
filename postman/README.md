@@ -11,3 +11,6 @@ npm install -g newman
 ```shell
 newman run users.postman_collection.json
 ```
+
+Result:
+![newman_result](newman_result.png)
