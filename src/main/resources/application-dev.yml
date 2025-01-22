@@ -1,0 +1,8 @@
+config:
+  db:
+    url: jdbc:postgresql://localhost:5439/users
+    user: test
+    password: test
+spring:
+  jpa:
+    show-sql: true

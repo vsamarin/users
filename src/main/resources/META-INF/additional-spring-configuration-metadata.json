@@ -1,0 +1,19 @@
+{
+  "properties": [
+    {
+      "name": "config.db.url",
+      "type": "java.lang.String",
+      "description": "Строка подключения к базе данных."
+    },
+    {
+      "name": "config.db.user",
+      "type": "java.lang.String",
+      "description": "Пользователь базы данных."
+    },
+    {
+      "name": "config.db.password",
+      "type": "java.lang.String",
+      "description": "Пароль пользователя базы данных."
+    }
+  ]
+}

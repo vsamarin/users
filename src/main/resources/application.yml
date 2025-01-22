@@ -1,0 +1,33 @@
+server:
+  port: 8000
+  servlet:
+    context-path: /
+
+spring:
+  flyway:
+    enabled: true
+    driver-class-name: org.postgresql.Driver
+    url: ${config.db.url}
+    user: ${config.db.user}
+    password: ${config.db.password}
+    locations: db/migration
+    fail-on-missing-locations: true
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${config.db.url}
+    username: ${config.db.user}
+    password: ${config.db.password}
+  jpa:
+    open-in-view: false
+    hibernate.ddl-auto: none
+
+springdoc:
+  api-docs:
+    path: /swagger/v1/openapi
+  swagger-ui:
+    use-root-path: true
+    displayOperationId: true
+
+logging:
+  config: classpath:logback-spring.xml
+

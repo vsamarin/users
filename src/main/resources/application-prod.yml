@@ -1,0 +1,8 @@
+config:
+  db:
+    url: ${USERS_DB_URL}
+    user: ${USERS_DB_USER}
+    password: ${USERS_DB_PASSWORD}
+spring:
+  jpa:
+    show-sql: true
