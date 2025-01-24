@@ -1,0 +1,48 @@
+services:
+
+  postgres:
+    image: postgres:14-alpine
+    container_name: postgres
+    restart: "no"
+    environment:
+      - POSTGRES_DB=users
+      - POSTGRES_USER=test
+      - POSTGRES_PASSWORD=test
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - 5439:5432
+    networks:
+      - home-network
+    healthcheck:
+      test: [ 'CMD-SHELL', 'pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB' ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  prometheus:
+    image: prom/prometheus:v3.1.0
+    container_name: prometheus
+    restart: "no"
+    volumes:
+      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - '9090:9090'
+    networks:
+      - home-network
+
+  grafana:
+    image: grafana/grafana-enterprise:11.4.0
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    networks:
+      - home-network
+
+volumes:
+  pgdata:
+    driver: local
+
+networks:
+  home-network:
+    driver: bridge
