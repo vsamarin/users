@@ -1,0 +1,10 @@
+apiVersion: 1
+contactPoints:
+    - orgId: 1
+      name: webhook
+      receivers:
+        - uid: aeazd0f62ax35f
+          type: webhook
+          settings:
+            url: https://webhook.site/59553be7-610f-48ce-bed7-cde86fcf6f36
+          disableResolveMessage: false

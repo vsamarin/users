@@ -1,0 +1,267 @@
+apiVersion: 1
+groups:
+    - orgId: 1
+      name: test
+      folder: Alerts
+      interval: 1m
+      rules:
+        - uid: ceazdknkedpfke
+          title: Memory(Mi)
+          condition: C
+          data:
+            - refId: A
+              relativeTimeRange:
+                from: 900
+                to: 0
+              datasourceUid: feaz8e59jy41se
+              model:
+                adhocFilters: []
+                datasource:
+                    type: prometheus
+                    uid: feaz8e59jy41se
+                editorMode: code
+                exemplar: true
+                expr: max(container_memory_working_set_bytes{pod=~"users.*"} / (1024*1024)) by (pod)
+                interval: ""
+                intervalMs: 15000
+                legendFormat: '{{pod}}'
+                maxDataPoints: 43200
+                range: true
+                refId: A
+            - refId: B
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params: []
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - B
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                reducer: last
+                refId: B
+                type: reduce
+            - refId: C
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 324
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - C
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: B
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: C
+                type: threshold
+          dashboardUid: wu-8KEN7z
+          panelId: 4
+          noDataState: NoData
+          execErrState: Error
+          for: 1m
+          annotations:
+            __dashboardUid__: wu-8KEN7z
+            __panelId__: "4"
+            description: Тестовое описание1111111.
+            summary: Превышено пороговое значение параметра!!!
+          isPaused: false
+          notification_settings:
+            receiver: webhook
+        - uid: deazgqmak1c74c
+          title: Latency (Response time) of 50%, 90%, 95%, max of requests
+          condition: F
+          data:
+            - refId: A
+              relativeTimeRange:
+                from: 900
+                to: 0
+              datasourceUid: feaz8e59jy41se
+              model:
+                adhocFilters: []
+                datasource:
+                    type: prometheus
+                    uid: feaz8e59jy41se
+                editorMode: code
+                expr: histogram_quantile(1, sum(rate(http_server_requests_seconds_bucket{app="users", instance="10.244.0.7:8000"}[5m])) by (le))
+                format: time_series
+                instant: false
+                interval: ""
+                intervalFactor: 1
+                intervalMs: 15000
+                legendFormat: max
+                maxDataPoints: 43200
+                refId: A
+            - refId: E
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params: []
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - E
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                reducer: last
+                refId: E
+                type: reduce
+            - refId: F
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 4
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - F
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: E
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: F
+                type: threshold
+          dashboardUid: feaz8e59jy41se1
+          panelId: 14
+          noDataState: NoData
+          execErrState: Error
+          for: 1m
+          annotations:
+            __dashboardUid__: feaz8e59jy41se1
+            __panelId__: "14"
+            description: Тестовый текст!!!
+            summary: Превышено пороговое значение!!!!
+          isPaused: false
+          notification_settings:
+            receiver: webhook
+        - uid: deazhhm4bvw8wd
+          title: Error Rate 500
+          condition: C
+          data:
+            - refId: A
+              relativeTimeRange:
+                from: 900
+                to: 0
+              datasourceUid: feaz8e59jy41se
+              model:
+                adhocFilters: []
+                datasource:
+                    type: prometheus
+                    uid: feaz8e59jy41se
+                editorMode: code
+                expr: sum(increase(http_server_requests_seconds_count{status="500"}[5m])) by (app, uri)
+                format: time_series
+                instant: false
+                interval: ""
+                intervalFactor: 1
+                intervalMs: 15000
+                legendFormat: '{{method}} {{uri}}'
+                maxDataPoints: 43200
+                refId: A
+            - refId: B
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params: []
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - B
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                reducer: last
+                refId: B
+                type: reduce
+            - refId: C
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 50000
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - C
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: B
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: C
+                type: threshold
+          dashboardUid: feaz8e59jy41se1
+          panelId: 12
+          noDataState: NoData
+          execErrState: Error
+          for: 1m
+          annotations:
+            __dashboardUid__: feaz8e59jy41se1
+            __panelId__: "12"
+            description: Какое-то описание!
+            summary: Превышен Error Rate!!!!!
+          isPaused: false
+          notification_settings:
+            receiver: webhook
