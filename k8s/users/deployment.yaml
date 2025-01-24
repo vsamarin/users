@@ -16,10 +16,14 @@ spec:
     metadata:
       labels:
         app: users
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8000"
+        prometheus.io/path: "/actuator/prometheus"
     spec:
       containers:
         - name: users
-          image: vsamarin/users:1.0.0
+          image: vsamarin/users:1.0.1
           ports:
             - name: web
               containerPort: 8000
