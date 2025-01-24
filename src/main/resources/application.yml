@@ -31,3 +31,16 @@ springdoc:
 logging:
   config: classpath:logback-spring.xml
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: 'prometheus'
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
+          client:
+            requests: true
