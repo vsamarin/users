@@ -1,19 +1,19 @@
 ## Build Docker Image
 
 ```shell
-docker build . --platform linux/amd64 -t vsamarin/users:1.0.1
+docker build . --platform linux/amd64 -t vsamarin/users:1.0.3
 ```
 
 ## Push Docker Image
 
 ```shell
-docker push vsamarin/users:1.0.1
+docker push vsamarin/users:1.0.3
 ```
 
 ## Run Docker Image
 
 ```shell
-docker run -p 8080:8000 --env-file .env vsamarin/users:1.0.1
+docker run -p 8080:8000 --env-file .env vsamarin/users:1.0.3
 ```
 
 ## Errors rate
@@ -45,3 +45,4 @@ https://prometheus.io/docs/practices/histograms/
 https://prometheus.io/docs/prometheus/latest/querying/functions/#irate
 https://habr.com/ru/companies/tochka/articles/693834/
 
+outbox

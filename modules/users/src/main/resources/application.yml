@@ -8,6 +8,7 @@ spring:
     enabled: true
     driver-class-name: org.postgresql.Driver
     url: ${config.db.url}
+    schemas: ${config.db.schema}
     user: ${config.db.user}
     password: ${config.db.password}
     locations: db/migration
@@ -15,9 +16,13 @@ spring:
   datasource:
     driver-class-name: org.postgresql.Driver
     url: ${config.db.url}
+    hikari.schema: ${config.db.schema}
     username: ${config.db.user}
     password: ${config.db.password}
   jpa:
+    properties:
+      hibernate:
+        default_schema: ${config.db.schema}
     open-in-view: false
     hibernate.ddl-auto: none
 
@@ -30,6 +35,7 @@ springdoc:
 
 logging:
   config: classpath:logback-spring.xml
+logging.level.org.springframework.amqp.rabbit.core: TRACE
 
 management:
   endpoints:

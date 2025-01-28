@@ -6,12 +6,10 @@ import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 import ru.otus.homework.users.validator.UserNameUniqueConstraint;
 
 @Getter
 @Setter
-@Accessors(chain = true)
 @UserNameUniqueConstraint
 public class User {
 

@@ -9,7 +9,7 @@ ADD ./*.xml /src/
 # Скачиваем зависимости указанные в pom.xml из репозиториев указанных в settings.xml (например корпоративных)
 RUN ["/usr/local/bin/mvn-entrypoint.sh", "mvn", "--s", "/src/settings.xml", "--f", "/src/pom.xml", "dependency:go-offline", "--fail-never", "-Dmaven.artifact.threads=32", "install", "clean", "-T", "32", "-B"]
 # Копируем исходники приложения
-COPY ./ /src/
+COPY ../.. /src/
 # Запускаем сборку в оффлайн моде
 RUN ["mvn", "package", "--f", "/src/pom.xml", "--s", "/src/settings.xml"]
 
@@ -18,7 +18,7 @@ FROM eclipse-temurin:21-jre-alpine AS runner
 # Создаем папку для приложения
 WORKDIR /app
 # Копируем результаты сборки в папку с приложением
-COPY --from=builder ./src/target/*.jar ./app.jar
+COPY --from=builder users/src/target/*.jar ./app.jar
 # Документируем порт на котором будет работать приложение
 EXPOSE 8000
 # Запускаем приложение

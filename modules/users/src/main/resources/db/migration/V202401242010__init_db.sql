@@ -1,4 +1,4 @@
-CREATE TABLE public.t_user
+CREATE TABLE users.t_user
 (
     id        BIGSERIAL PRIMARY KEY,
     username  varchar(255) NOT NULL,
@@ -8,8 +8,8 @@ CREATE TABLE public.t_user
     phone     varchar(255) NOT NULL
 );
 
-ALTER TABLE public.t_user
+ALTER TABLE users.t_user
     ADD CONSTRAINT t_user_name_uq UNIQUE (username);
 
-INSERT INTO public.t_user(username, firstName, lastName, email, phone)
+INSERT INTO users.t_user(username, firstName, lastName, email, phone)
 VALUES ('vsamarin', 'Владислав', 'Самарин', 'vsamarin@test.ru', '+79060948706');

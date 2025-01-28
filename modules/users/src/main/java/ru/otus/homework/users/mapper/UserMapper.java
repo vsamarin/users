@@ -9,15 +9,15 @@ public class UserMapper implements Mapper<UserEntity, User> {
 
     @Override
     public User map(UserEntity entity) {
-        return entity == null ?
-                null :
-                new User()
-                        .setId(entity.id())
-                        .setUsername(entity.username())
-                        .setFirstName(entity.firstName())
-                        .setLastName(entity.lastName())
-                        .setEmail(entity.email())
-                        .setPhone(entity.phone());
+        if (entity == null) return null;
+        User user = new User();
+        user.setId(entity.id());
+        user.setUsername(entity.username());
+        user.setFirstName(entity.firstName());
+        user.setLastName(entity.lastName());
+        user.setEmail(entity.email());
+        user.setPhone(entity.phone());
+        return user;
     }
 
     public UserEntity map(User dto) {

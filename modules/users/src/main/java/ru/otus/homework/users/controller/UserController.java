@@ -128,7 +128,6 @@ public class UserController {
     public User edit(
             @Parameter(description = "ID of user", name = "userId")
             @PathVariable("userId") Long userId,
-            @Valid
             @RequestBody User userDto
     ) {
         return userMapper.map(userService.edit(userMapper.map(userId, userDto)));
