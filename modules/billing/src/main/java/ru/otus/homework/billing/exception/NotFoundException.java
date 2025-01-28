@@ -1,4 +1,4 @@
-package ru.otus.homework.users.exception;
+package ru.otus.homework.billing.exception;
 
 
 import org.springframework.http.HttpStatus;

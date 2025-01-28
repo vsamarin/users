@@ -1,4 +1,4 @@
-package ru.otus.homework.users.exception;
+package ru.otus.homework.billing.exception;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -9,7 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.HandlerMethodValidationException;
-import ru.otus.homework.users.dto.Error;
+import ru.otus.homework.billing.dto.Error;
 
 import java.util.Objects;
 
@@ -26,11 +26,6 @@ public class ExceptionHandler {
     @org.springframework.web.bind.annotation.ExceptionHandler({NotFoundException.class})
     public ResponseEntity<?> unprocessableEntity(NotFoundException e) {
         return processException(e, HttpStatus.NOT_FOUND);
-    }
-
-    @org.springframework.web.bind.annotation.ExceptionHandler({BadInputDataException.class})
-    public ResponseEntity<?> unprocessableEntity(BadInputDataException e) {
-        return processException(e, HttpStatus.BAD_REQUEST);
     }
 
     @org.springframework.web.bind.annotation.ExceptionHandler({HandlerMethodValidationException.class})

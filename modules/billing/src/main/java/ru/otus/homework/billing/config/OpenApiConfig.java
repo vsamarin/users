@@ -1,4 +1,4 @@
-package ru.otus.homework.users.config;
+package ru.otus.homework.billing.config;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
@@ -16,7 +16,7 @@ public class OpenApiConfig {
 
     private Info info() {
         return new Info()
-                .title("USERS API")
+                .title("BILLING API")
                 .version("v1");
     }
 

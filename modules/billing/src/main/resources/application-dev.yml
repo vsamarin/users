@@ -1,0 +1,18 @@
+config:
+  db:
+    url: jdbc:postgresql://localhost:5439/users
+    schema: billing
+    user: test
+    password: test
+spring:
+  jpa:
+    show-sql: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: rabbitmq
+    password: rabbitmq
+    #publisher-confirm-type: correlated
+    #publisher-returns: true
+    template:
+      reply-timeout: 10000

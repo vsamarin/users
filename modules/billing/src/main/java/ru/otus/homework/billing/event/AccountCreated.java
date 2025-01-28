@@ -1,4 +1,4 @@
-package ru.otus.homework.users.dto;
+package ru.otus.homework.billing.event;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,9 +7,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class Error {
-    private Integer code;
-    private String message;
+@NoArgsConstructor
+public class AccountCreated {
+    private Long accountId;
 }
