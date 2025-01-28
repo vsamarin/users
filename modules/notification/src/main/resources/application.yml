@@ -1,0 +1,58 @@
+server:
+  port: 8006
+  servlet:
+    context-path: /
+
+spring:
+  flyway:
+    enabled: true
+    driver-class-name: org.postgresql.Driver
+    url: ${config.db.url}
+    schemas: ${config.db.schema}
+    user: ${config.db.user}
+    password: ${config.db.password}
+    locations: db/migration
+    fail-on-missing-locations: true
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${config.db.url}
+    hikari.schema: ${config.db.schema}
+    username: ${config.db.user}
+    password: ${config.db.password}
+  jpa:
+    properties:
+      hibernate:
+        default_schema: ${config.db.schema}
+    open-in-view: false
+    hibernate.ddl-auto: none
+
+springdoc:
+  api-docs:
+    path: /swagger/v1/openapi
+  swagger-ui:
+    use-root-path: true
+    displayOperationId: true
+
+logging:
+  config: classpath:logback-spring.xml
+
+  level:
+    org:
+      springframework:
+        amqp:
+          rabbit:
+            core: TRACE
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: 'prometheus'
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
+          client:
+            requests: true
