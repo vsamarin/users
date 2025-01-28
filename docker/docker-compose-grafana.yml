@@ -20,29 +20,27 @@ services:
       timeout: 5s
       retries: 5
 
-  rabbitmq:
-    image: rabbitmq:3.13.7-management-alpine
-    restart: no
-    container_name: rabbitmq
-    ports:
-      - "5672:5672"
-      - "15672:15672"
-      - "4369:4369"
-      - "5671:5671"
-    hostname: rabbitmq
-    environment:
-      - RABBITMQ_DEFAULT_USER=rabbitmq
-      - RABBITMQ_DEFAULT_PASS=rabbitmq
-    tty: true
+  prometheus:
+    image: prom/prometheus:v3.1.0
+    container_name: prometheus
+    restart: "no"
     volumes:
-      - rabbit:/var/lib/rabbitmq
+      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - '9090:9090'
+    networks:
+      - home-network
+
+  grafana:
+    image: grafana/grafana-enterprise:11.4.0
+    container_name: grafana
+    ports:
+      - "3000:3000"
     networks:
       - home-network
 
 volumes:
   pgdata:
-    driver: local
-  rabbit:
     driver: local
 
 networks:
