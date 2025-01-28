@@ -18,7 +18,7 @@ FROM eclipse-temurin:21-jre-alpine AS runner
 # Создаем папку для приложения
 WORKDIR /app
 # Копируем результаты сборки в папку с приложением
-COPY --from=builder users/src/target/*.jar ./app.jar
+COPY --from=builder src/target/*.jar ./app.jar
 # Документируем порт на котором будет работать приложение
 EXPOSE 8006
 # Запускаем приложение
