@@ -9,8 +9,8 @@ npm install -g newman
 ## Run newman
 
 ```shell
-newman run users.postman_collection.json
+newman run users-collection.json
 ```
 
 Result:
-![newman_result](newman_result.png)
+![newman_result](../users/newman_result.png)

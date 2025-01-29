@@ -1,0 +1,287 @@
+{
+	"info": {
+		"_postman_id": "3b2b437e-6a0a-4b63-a8ca-9d8845784cf4",
+		"name": "user-orders",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19330437"
+	},
+	"item": [
+		{
+			"name": "01_user_create",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const uuid = require('uuid');\r",
+							"pm.collectionVariables.set(\"username\",'jsnow-'+ uuid.v4());"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json();\r",
+							"pm.collectionVariables.set(\"userId\", response.id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"{{username}}\",\r\n  \"firstName\": \"John\",\r\n  \"lastName\": \"Snow\",\r\n  \"email\": \"jsnow@doe.com\",\r\n  \"phone\": \"+71002003040\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users/user",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "02_find_account",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/billing/api/v1/account/{{userId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"billing",
+						"api",
+						"v1",
+						"account",
+						"{{userId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "03_deposite_money",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"amount\": 100\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/billing/api/v1/account/{{userId}}/deposit",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"billing",
+						"api",
+						"v1",
+						"account",
+						"{{userId}}",
+						"deposit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "04_create_order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json();\r",
+							"pm.collectionVariables.set(\"orderId\", response.id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userId\": {{userId}},\r\n  \"price\": 74,\r\n  \"product\": \"Молоко\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/orders/api/v1/order",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"orders",
+						"api",
+						"v1",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "05_check_account_money",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/billing/api/v1/account/{{userId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"billing",
+						"api",
+						"v1",
+						"account",
+						"{{userId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "06_check_notitications",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/notification/api/v1/notification/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"notification",
+						"api",
+						"v1",
+						"notification",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "07_create_order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json();\r",
+							"pm.collectionVariables.set(\"orderId\", response.id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userId\": {{userId}},\r\n  \"price\": 724,\r\n  \"product\": \"Торт\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/orders/api/v1/order",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"orders",
+						"api",
+						"v1",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "08_check_account_money",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/billing/api/v1/account/{{userId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"billing",
+						"api",
+						"v1",
+						"account",
+						"{{userId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "09_check_notitications",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/notification/api/v1/notification/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"notification",
+						"api",
+						"v1",
+						"notification",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "orderId",
+			"value": ""
+		}
+	]
+}
