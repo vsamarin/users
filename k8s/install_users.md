@@ -7,7 +7,7 @@ kubectl apply -f ./users/
 Open in browser:
 
 ````
-http://arch.homework
+http://arch.homework/users
 ````
 
 ## Uninstall User Service

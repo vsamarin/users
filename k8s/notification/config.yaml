@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: users-config
+  name: notification-config
   namespace: homework
   labels:
-    app: users
+    app: notification
 data:
   db.url: jdbc:postgresql://postgresql:5432/users
-  db.schema: users
   db.user: test
+  db.schema: notification
 

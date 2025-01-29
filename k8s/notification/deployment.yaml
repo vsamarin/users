@@ -1,13 +1,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: users
+  name: notification
   namespace: homework
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: users
+      app: notification
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -16,15 +16,16 @@ spec:
   template:
     metadata:
       labels:
-        app: users
+        app: notification
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/port: "8000"
         prometheus.io/path: "/actuator/prometheus"
     spec:
       containers:
-        - name: users
-          image: vsamarin/users:1.0.3
+        - name: notification
+          image: vsamarin/notification:1.0.0
+          imagePullPolicy: Always
           ports:
             - name: web
               containerPort: 8000
@@ -32,22 +33,22 @@ spec:
             - name: DB_URL
               valueFrom:
                 configMapKeyRef:
-                  name: users-config
+                  name: notification-config
                   key: db.url
             - name: DB_USER
               valueFrom:
                 configMapKeyRef:
-                  name: users-config
+                  name: notification-config
                   key: db.user
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: users-secret
+                  name: notification-secret
                   key: db.password
             - name: CONTEXT_PATH
-              value: /users
+              value: /notification
             - name: DB_SCHEMA
-              value: users
+              value: notification
             - name: RABBITMQ_HOST
               value: rabbitmq
             - name: RABBITMQ_PORT
